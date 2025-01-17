@@ -29,13 +29,9 @@ var (
 // loggingCmd represents the logging command
 var loggingCmd = &cobra.Command{
 	Use:   "logging",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Change the logging configuration",
+	Long: `Change the logging configuration of the application.
+All the configurations that can be changed are optional and can be seen under the flags section.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("logging called")
 		bindLoggingFlags()
