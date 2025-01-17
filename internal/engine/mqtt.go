@@ -90,6 +90,8 @@ func (e *Engine) handleMqttConnectionError(err error, username, password string)
 func (e *Engine) mqttStatePersistStart() {
 	mqttStartTime = time.Now()
 
+	e.WriteToLogFile("./connections/connections.log", fmt.Sprintf("%s: MQTT connection started\n", mqttStartTime.Format(time.RFC3339)))
+
 	e.statePersister.Set("mqtt", map[string]interface{}{})
 	e.statePersister.Set("mqtt.status", "connected")
 	e.statePersister.Set("mqtt.start_time", startTime.Format(time.RFC3339))
@@ -105,6 +107,8 @@ func (e *Engine) mqttStatePersistStop() {
 		mqttEndTime = time.Now()
 
 		duration := mqttEndTime.Sub(startTime)
+
+		e.WriteToLogFile("./connections/connections.log", fmt.Sprintf("%s: MQTT connection stopped\n", mqttEndTime.Format(time.RFC3339)))
 
 		e.statePersister.Set("mqtt.end_time", mqttEndTime.Format(time.RFC3339))
 		e.statePersister.Set("mqtt.duration", duration.String())

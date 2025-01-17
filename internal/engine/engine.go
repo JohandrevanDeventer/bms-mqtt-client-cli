@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/JohandrevanDeventer/bms-mqtt-client-cli/internal/config"
@@ -56,6 +57,8 @@ func (e *Engine) Run(ctx context.Context) {
 	e.statePersister.Set("app.environment", e.cfg.Flags.Environment)
 	e.statePersister.Set("app.start_time", startTime.Format(time.RFC3339))
 
+	e.WriteToLogFile("./connections/connections.log", fmt.Sprintf("%s: App started\n", startTime.Format(time.RFC3339)))
+
 	e.start()
 
 	// Main Engine logic
@@ -104,9 +107,13 @@ func (e *Engine) Stop() {
 	duration := endTime.Sub(startTime)
 
 	e.logger.Info("Stopping application")
+
+	e.WriteToLogFile("./connections/connections.log", fmt.Sprintf("%s: App stopped\n", endTime.Format(time.RFC3339)))
+
 	e.statePersister.Set("app.status", "stopped")
 	e.statePersister.Set("app.end_time", endTime.Format(time.RFC3339))
 	e.statePersister.Set("app.duration", duration.String())
+
 }
 
 func (e *Engine) WatchStopFile(stopFilePath string) {
@@ -131,4 +138,26 @@ func (e *Engine) WatchStopFile(stopFilePath string) {
 
 func (e *Engine) StopFileDetected() <-chan struct{} {
 	return e.stopFileChan
+}
+
+func (e *Engine) WriteToLogFile(path string, message string) {
+	// Create the directory structure if it doesn't exist
+	dir := filepath.Dir(path)
+	if err := os.MkdirAll(dir, 0755); err != nil {
+		e.logger.Error("Failed to create directory for log file", zap.String("directory", dir), zap.Error(err))
+		return
+	}
+
+	// Open the file for appending or create it if it doesn't exist
+	file, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		e.logger.Error("Failed to open log file", zap.String("file", path), zap.Error(err))
+		return
+	}
+	defer file.Close()
+
+	// Write the message to the file
+	if _, err := file.WriteString(message); err != nil {
+		e.logger.Error("Failed to write to log file", zap.String("file", path), zap.Error(err))
+	}
 }
