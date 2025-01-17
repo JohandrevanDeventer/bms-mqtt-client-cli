@@ -12,10 +12,10 @@ var systemConfigFilePath = fmt.Sprintf("%s/%s", configRoot, systemConfigFile)
 var systemConfig *SystemConfig
 
 var defaultSystemConfig = SystemConfig{
-	AppName:      "Go REST API",
+	AppName:      "Rubicon BMS MQTT Client CLI",
 	AppVersion:   "1.0.0",
 	BuildNumber:  1,
-	ReleaseDate:  "2021-01-01",
+	ReleaseDate:  "2025-01-01",
 	Contributors: []string{"Johandré van Deventer"},
 }
 
@@ -32,7 +32,11 @@ func InitSystemConfig() (fileExists bool, err error) {
 	// This is just to set the default values
 	GetSystemConfig()
 
-	// We don't need to save the system configuration
+	// Save the system configuration
+	err = SaveSystemConfig(true)
+	if err != nil {
+		return false, err
+	}
 
 	return false, nil
 }
@@ -54,4 +58,10 @@ func SaveSystemConfig(createFile bool) error {
 	}
 
 	return nil
+}
+
+// IncrementBuildNumber increments the build number
+func IncrementBuildNumber() {
+	systemConfig.BuildNumber++
+	_ = SaveSystemConfig(false)
 }

@@ -28,11 +28,22 @@ var (
 
 // Config represents the application configuration
 func InitConfig() (newFiles []string, existingFiles []string, err error) {
-	// The system config doesn't have to be saved to a file
-	_, _ = InitSystemConfig()
+	// Initialize the system configuration file and save it to a file
+	systemCfgExists := false
+	systemCfgExists, err = InitSystemConfig()
+	if systemCfgExists {
+		existingFiles = append(existingFiles, systemConfigFilePath)
+	} else {
+		newFiles = append(newFiles, systemConfigFilePath)
+	}
+
+	if err != nil {
+		return newFiles, existingFiles, err
+	}
 
 	// Initialize the application configuration file and save it to a file
-	appCfgExists, err := InitAppConfig()
+	appCfgExists := false
+	appCfgExists, err = InitAppConfig()
 	if appCfgExists {
 		existingFiles = append(existingFiles, appConfigFilePath)
 	} else {
@@ -42,11 +53,6 @@ func InitConfig() (newFiles []string, existingFiles []string, err error) {
 	if err != nil {
 		return newFiles, existingFiles, err
 	}
-
-	// err = SaveAppConfig()
-	// if err != nil {
-	// 	return newFiles, existingFiles, err
-	// }
 
 	return newFiles, existingFiles, nil
 }
