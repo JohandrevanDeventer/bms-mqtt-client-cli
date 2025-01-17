@@ -4,8 +4,6 @@ Copyright © 2025 Johandré van Deventer <johandre.vandeventer@rubiconsa.com>
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
@@ -15,7 +13,6 @@ var versionCmd = &cobra.Command{
 	Short: "Print the version number of bms-mqtt-client-cli",
 	Long:  `All software has versions. This is bms-mqtt-client-cli's`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("version called")
 	},
 }
 

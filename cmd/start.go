@@ -5,7 +5,6 @@ package cmd
 
 import (
 	"context"
-	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
@@ -26,8 +25,6 @@ var startCmd = &cobra.Command{
 	Short: "Start the Rubicon BMS MQTT Client",
 	Long:  `This command starts the Rubicon BMS MQTT Client.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("start called")
-
 		cfg = config.GetConfig()
 
 		initLogger(cfg)

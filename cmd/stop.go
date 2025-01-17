@@ -16,7 +16,6 @@ var stopCmd = &cobra.Command{
 	Short: "Stop the Rubicon BMS MQTT Client",
 	Long:  `This command stops the Rubicon BMS MQTT Client.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("stop called")
 		stopFilePath := "./tmp/stop_signal"
 		if _, err := os.Create(stopFilePath); err != nil {
 			fmt.Println("Failed to create stop file:", err)

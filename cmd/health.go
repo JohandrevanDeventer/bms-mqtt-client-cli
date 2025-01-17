@@ -19,8 +19,6 @@ var healthCmd = &cobra.Command{
 	Long: `The health command is used to view the health of the system.
 It will display the raw JSON content of the persist.json file.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("health called")
-
 		// Read the content of the JSON file
 		filePath := "./persist/persist.json"
 		data, err := os.ReadFile(filePath)

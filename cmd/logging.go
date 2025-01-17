@@ -33,7 +33,6 @@ var loggingCmd = &cobra.Command{
 	Long: `Change the logging configuration of the application.
 All the configurations that can be changed are optional and can be seen under the flags section.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("logging called")
 		bindLoggingFlags()
 	},
 }
