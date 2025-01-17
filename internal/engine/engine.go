@@ -35,7 +35,7 @@ func NewEngine(cfg *config.Config, logger *zap.Logger, statePersister *persist.F
 }
 
 func (e *Engine) Run(ctx context.Context) {
-	// defer e.Cleanup()
+	defer e.Cleanup()
 
 	e.logger.Info("Starting application")
 

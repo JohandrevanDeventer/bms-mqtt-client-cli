@@ -58,10 +58,15 @@ to quickly create a Cobra application.`,
 			}
 
 			// Ensure application cleanup and shutdown
-			svc.Cleanup() // Cleanup resources
-			svc.Stop()    // Stop the engine
-			stop()        // Cancel the context
+			// svc.Cleanup() // Cleanup resources
+			svc.Stop() // Stop the engine
+			stop()     // Cancel the context
 		}()
+
+		// go func() {
+		// 	<-ctx.Done()
+		// 	svc.Stop()
+		// }()
 
 		defer func() {
 			if r := recover(); r != nil {
