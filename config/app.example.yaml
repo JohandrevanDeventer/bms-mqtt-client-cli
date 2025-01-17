@@ -1,0 +1,19 @@
+logging:
+    level: debug
+    file_path: ./logs/log.jsonl
+    max_size: 100
+    max_backups: 3
+    max_age: 28
+    compress: true
+    add_time: true
+mqtt:
+    broker: broker.emqx.io
+    client_id: bms-mqtt-client-cli
+    port: 1883
+    topic: test
+    qos: 0
+    clean_session: true
+    keep_alive: 60
+    reconnect_on_failure: true
+    username: ""
+    password: ""

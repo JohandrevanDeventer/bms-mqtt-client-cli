@@ -1,0 +1,73 @@
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Build directories
+_build/
+out/
+bin/
+dist/
+tmp/
+
+# Go build artifacts
+*.log
+*.test
+*.out
+
+# Dependency directories (specific to vendoring)
+vendor/
+
+# IDEs and text editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# Operating system files
+.DS_Store
+Thumbs.db
+*.bak
+
+# Logs and debugging files
+*.log
+*.trace
+*.jsonl
+logs
+
+# Coverage files
+*.cover
+coverage.out
+
+# Go modules
+go.sum
+
+# Testing cache
+testdata/
+
+# Generated files
+gen/
+
+# Docker-related
+docker-compose.override.yml
+.env
+
+# Temporary files
+*.tmp
+*.temp
+*.old
+*.orig
+
+# Git-specific
+*.lock
+
+# Ignore user configuration files
+config/app.yaml
+
+# Ignore the ./persist/ directory
+/persist/
+
+# Ensure ./pkg/persist/ is not ignored
+!/pkg/persist/
