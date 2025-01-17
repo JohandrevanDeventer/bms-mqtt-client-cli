@@ -65,6 +65,7 @@ docker-compose.override.yml
 
 # Ignore user configuration files
 config/app.yaml
+config/system.yaml
 
 # Ignore the ./persist/ directory
 /persist/
