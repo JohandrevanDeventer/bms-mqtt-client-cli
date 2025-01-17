@@ -1,0 +1,6 @@
+app_name: Rubicon BMS MQTT Client CLI
+app_version: 1.0.0
+build_number: 1
+release_date: "2025-01-01"
+contributors:
+    - Johandré van Deventer
