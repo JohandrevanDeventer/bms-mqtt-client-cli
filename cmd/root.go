@@ -46,7 +46,7 @@ to quickly create a Cobra application.`,
 
 		bindRootFlags()
 
-		if cmd.Use == "bms-mqtt-client-cli" || cmd.Use == "start" {
+		if cmd.Use == "start" {
 			config.PrintInfo(false)
 		} else {
 			config.PrintInfo(true)
@@ -57,7 +57,7 @@ to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(cmd.Help())
+		cmd.Help()
 	},
 }
 
@@ -83,7 +83,7 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	// rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
 // bindRootFlags binds the root flags to the configuration
